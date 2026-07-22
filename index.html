@@ -98,10 +98,48 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 .hero-eyebrow{ display:flex; align-items:center; gap:12px; margin-bottom:26px; }
 .hero-eyebrow::after{ content:""; flex:1; height:1px; background:var(--rule); }
 
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) clamp(240px, 30%, 340px);
+  gap:clamp(28px, 5vw, 64px);
+  align-items:center;
+}
+@media (max-width:880px){
+  .hero-grid{ grid-template-columns:1fr; gap:44px; }
+}
+
+/* 지식 개념맵 — 히어로 그래픽 */
+.kmap{ margin:0; }
+.kmap svg{ display:block; width:100%; height:auto; overflow:visible; }
+.kmap figcaption{
+  margin-top:18px; padding-top:14px; border-top:1px solid var(--rule);
+  font-size:12px; line-height:1.6; color:var(--ink-soft); max-width:34ch;
+}
+.kmap .edge{
+  fill:none; stroke:var(--ink); stroke-width:1.2; opacity:.26;
+  stroke-dasharray:220; stroke-dashoffset:220;
+  animation:kdraw .9s cubic-bezier(.4,.1,.3,1) forwards;
+}
+.kmap .nd{
+  fill:var(--paper); stroke:var(--ink); stroke-width:1.5;
+  opacity:0; animation:kfade .5s ease forwards;
+}
+.kmap .nd.on{ fill:var(--pen); stroke:var(--pen); }
+.kmap .lbl{
+  font-family:var(--sans); font-size:10.5px; letter-spacing:.08em;
+  fill:var(--ink-soft); text-anchor:middle;
+  opacity:0; animation:kfade .6s ease .15s forwards;
+}
+@keyframes kdraw{ to{ stroke-dashoffset:0; } }
+@keyframes kfade{ to{ opacity:1; } }
+@media (max-width:880px){
+  .kmap{ max-width:330px; }
+}
+
 .hero h1{
   font-family:var(--serif);
-  font-size:clamp(30px, 6vw, 60px);
-  line-height:1.3;
+  font-size:clamp(28px, 4.5vw, 50px);
+  line-height:1.32;
   letter-spacing:-.01em;
 }
 /* 좁은 화면에서는 강제 줄바꿈을 풀어 자연스럽게 흐르게 */
@@ -299,6 +337,8 @@ footer{
   html{ scroll-behavior:auto; }
   .reveal{ opacity:1; transform:none; }
   .circled path{ animation:none; stroke-dashoffset:0; }
+  .kmap .edge{ animation:none; stroke-dashoffset:0; }
+  .kmap .nd, .kmap .lbl{ animation:none; opacity:1; }
 }
 </style>
 </head>
@@ -325,6 +365,8 @@ footer{
       <span class="eyebrow">Education Content Planner, 10 yrs → AI Product Manager</span>
     </div>
 
+    <div class="hero-grid">
+      <div class="hero-copy">
     <h1>
       콘텐츠는 출시된 뒤에도<br />
       <span class="circled">신뢰받을 때<svg viewBox="0 0 320 96" aria-hidden="true"><path d="M308 32C266 8 132 2 68 16 10 29 6 62 66 78c74 20 218 14 240-12 9-11 2-24-40-33"/></svg></span> 완성된다.
@@ -345,6 +387,50 @@ footer{
       <span class="tag">데이터 기반 품질 관리</span>
       <span class="tag">AI 도구 활용</span>
     </div>
+      </div><!-- /hero-copy -->
+
+      <figure class="kmap">
+        <svg viewBox="0 0 380 380" role="img" aria-label="선행 개념과 후속 개념을 연결한 지식 개념맵 구조도">
+          <text class="lbl" x="52" y="18">선행</text>
+          <text class="lbl" x="190" y="18">본 학습</text>
+          <text class="lbl" x="328" y="18">후속</text>
+
+          <g>
+            <path class="edge" style="animation-delay:.25s" d="M52 100 C98 100 144 70 190 70"/>
+            <path class="edge" style="animation-delay:.30s" d="M52 100 C98 100 144 155 190 155"/>
+            <path class="edge" style="animation-delay:.35s" d="M52 215 C98 215 144 155 190 155"/>
+            <path class="edge" style="animation-delay:.40s" d="M52 215 C98 215 144 250 190 250"/>
+            <path class="edge" style="animation-delay:.45s" d="M52 330 C98 330 144 250 190 250"/>
+            <path class="edge" style="animation-delay:.50s" d="M52 330 C98 330 144 345 190 345"/>
+
+            <path class="edge" style="animation-delay:.60s" d="M190 70 C236 70 282 115 328 115"/>
+            <path class="edge" style="animation-delay:.65s" d="M190 155 C236 155 282 115 328 115"/>
+            <path class="edge" style="animation-delay:.70s" d="M190 155 C236 155 282 225 328 225"/>
+            <path class="edge" style="animation-delay:.75s" d="M190 250 C236 250 282 225 328 225"/>
+            <path class="edge" style="animation-delay:.80s" d="M190 250 C236 250 282 335 328 335"/>
+            <path class="edge" style="animation-delay:.85s" d="M190 345 C236 345 282 335 328 335"/>
+          </g>
+
+          <g>
+            <circle class="nd" style="animation-delay:.15s" cx="52" cy="100" r="6"/>
+            <circle class="nd" style="animation-delay:.20s" cx="52" cy="215" r="6"/>
+            <circle class="nd" style="animation-delay:.25s" cx="52" cy="330" r="6"/>
+
+            <circle class="nd" style="animation-delay:.55s" cx="190" cy="70" r="6"/>
+            <circle class="nd on" style="animation-delay:.55s" cx="190" cy="155" r="9"/>
+            <circle class="nd" style="animation-delay:.60s" cx="190" cy="250" r="6"/>
+            <circle class="nd" style="animation-delay:.60s" cx="190" cy="345" r="6"/>
+
+            <circle class="nd" style="animation-delay:.90s" cx="328" cy="115" r="6"/>
+            <circle class="nd" style="animation-delay:.95s" cx="328" cy="225" r="6"/>
+            <circle class="nd" style="animation-delay:1s" cx="328" cy="335" r="6"/>
+          </g>
+        </svg>
+        <figcaption>
+          하나의 개념은 앞선 개념 위에서만 성립합니다. 초등 전 과정 680개 개념을 이 구조로 정의했습니다.
+        </figcaption>
+      </figure>
+    </div><!-- /hero-grid -->
 
     <div class="hero-contact">
       <a href="mailto:kwangjin.owl@gmail.com">kwangjin.owl@gmail.com</a>
@@ -613,7 +699,7 @@ footer{
 
     <footer>
       <span class="code">김광진 · 교육 콘텐츠 기획</span>
-      <span class="code">build 5 · <span id="yr"></span></span>
+      <span class="code">build 6 · <span id="yr"></span></span>
     </footer>
   </section>
 
