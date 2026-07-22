@@ -80,18 +80,25 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
   border-bottom:1px solid var(--rule);
 }
 .topbar-in{
-  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  display:flex; align-items:center; gap:16px;
   padding:13px 0;
 }
-.mark-name{ font-family:var(--serif); font-size:17px; font-weight:700; letter-spacing:.02em; }
+.brand-group{ display:flex; align-items:baseline; gap:clamp(14px, 2.5vw, 26px); min-width:0; }
+.mark-name{ font-family:var(--serif); font-size:17px; font-weight:700; letter-spacing:.02em; white-space:nowrap; }
 .mark-name span{ color:var(--pen); }
-.topnav{ display:flex; gap:22px; }
+.topbar-contact{ display:flex; align-items:baseline; gap:0 12px; font-family:var(--mono); font-size:12px; }
+.topbar-contact a{ text-decoration:none; color:var(--ink-soft); white-space:nowrap; }
+.topbar-contact a:hover{ color:var(--pen); }
+.topbar-contact .sep{ color:var(--rule); }
+.topnav{ display:flex; gap:22px; margin-left:auto; }
 .topnav a{
   font-size:13px; color:var(--ink-soft); text-decoration:none;
   padding-bottom:2px; border-bottom:1px solid transparent;
 }
 .topnav a:hover{ color:var(--ink); border-color:var(--pen); }
 @media (max-width:640px){ .topnav{ display:none; } }
+@media (max-width:900px){ .topbar-contact .tel, .topbar-contact .sep{ display:none; } }
+@media (max-width:480px){ .topbar-contact{ display:none; } }
 
 /* ── 히어로 ─────────────────────────────────────── */
 .hero{ padding:clamp(64px, 12vw, 132px) 0 clamp(48px, 8vw, 88px); }
@@ -172,17 +179,6 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
   background:#fff; color:var(--ink-soft);
 }
 
-.hero-contact{
-  display:flex; flex-wrap:wrap; align-items:center; gap:0 14px;
-  margin-top:34px; padding-top:20px; border-top:1px solid var(--rule);
-  font-family:var(--mono); font-size:13px;
-}
-.hero-contact a{ text-decoration:none; padding:4px 0; border-bottom:1px solid var(--rule); }
-.hero-contact a:hover{ color:var(--pen); border-color:var(--pen); }
-.hero-contact .sep{ color:var(--rule); }
-@media (max-width:520px){
-  .hero-contact{ gap:0 10px; font-size:12px; }
-}
 
 /* ── 숫자 스트립 ────────────────────────────────── */
 .figures{
@@ -274,7 +270,7 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 }
 .bridge-from{ font-size:15px; color:var(--ink-soft); padding-right:16px; }
 .bridge-arrow{ font-family:var(--mono); font-size:15px; color:var(--pen); text-align:center; }
-.bridge-to{ font-family:var(--serif); font-size:clamp(16px,2vw,18.5px); line-height:1.5; }
+.bridge-to{ font-weight:600; font-size:clamp(15px,1.9vw,17px); line-height:1.55; }
 @media (max-width:640px){
   .bridge-head{ display:none; }
   .bridge-row{ grid-template-columns:1fr; padding:18px 0; }
@@ -347,7 +343,15 @@ footer{
 
 <div class="topbar">
   <div class="shell topbar-in">
-    <div class="mark-name">김광진<span>.</span></div>
+    <div class="brand-group">
+      <div class="mark-name">김광진<span>.</span></div>
+      <div class="topbar-contact">
+        <a href="mailto:kwangjin.owl@gmail.com">kwangjin.owl@gmail.com</a>
+        <span class="sep">·</span>
+        <!-- ▼ 실제 번호로 교체 (tel: 뒤 숫자도 함께) -->
+        <a class="tel" href="tel:010-XXXX-XXXX">010-XXXX-XXXX</a>
+      </div>
+    </div>
     <nav class="topnav" aria-label="섹션 이동">
       <a href="#what">하는 일</a>
       <a href="#path">경로</a>
@@ -432,17 +436,6 @@ footer{
       </figure>
     </div><!-- /hero-grid -->
 
-    <div class="hero-contact">
-      <a href="mailto:kwangjin.owl@gmail.com">kwangjin.owl@gmail.com</a>
-      <span class="sep">·</span>
-      <!-- ▼ 실제 번호로 교체 (tel: 뒤 숫자도 함께) -->
-      <a href="tel:010-XXXX-XXXX">010-XXXX-XXXX</a>
-      <span class="sep">·</span>
-      <a href="https://github.com/kwangjin-owl" target="_blank" rel="noopener">GitHub</a>
-      <span class="sep">·</span>
-      <!-- ▼ 포트폴리오 PDF 경로로 교체 (예: ./portfolio.pdf) -->
-      <a href="#">포트폴리오 PDF</a>
-    </div>
   </header>
 
   <!-- 숫자 -->
@@ -694,12 +687,14 @@ footer{
       <div class="contact-links">
         <a class="btn" href="mailto:kwangjin.owl@gmail.com">메일 보내기</a>
         <a class="btn ghost" href="https://github.com/kwangjin-owl" target="_blank" rel="noopener">GitHub</a>
+        <!-- ▼ 포트폴리오 PDF 경로로 교체 (예: ./portfolio.pdf) -->
+        <a class="btn ghost" href="#">포트폴리오 PDF</a>
       </div>
     </div>
 
     <footer>
       <span class="code">김광진 · 교육 콘텐츠 기획</span>
-      <span class="code">build 6 · <span id="yr"></span></span>
+      <span class="code">build 7 · <span id="yr"></span></span>
     </footer>
   </section>
 
