@@ -134,6 +134,18 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
   background:#fff; color:var(--ink-soft);
 }
 
+.hero-contact{
+  display:flex; flex-wrap:wrap; align-items:center; gap:0 14px;
+  margin-top:34px; padding-top:20px; border-top:1px solid var(--rule);
+  font-family:var(--mono); font-size:13px;
+}
+.hero-contact a{ text-decoration:none; padding:4px 0; border-bottom:1px solid var(--rule); }
+.hero-contact a:hover{ color:var(--pen); border-color:var(--pen); }
+.hero-contact .sep{ color:var(--rule); }
+@media (max-width:520px){
+  .hero-contact{ gap:0 10px; font-size:12px; }
+}
+
 /* ── 숫자 스트립 ────────────────────────────────── */
 .figures{
   display:grid; grid-template-columns:repeat(4, 1fr);
@@ -275,19 +287,6 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 .btn.ghost:hover{ background:#fff; }
 .btn:focus-visible, .topnav a:focus-visible{ outline:2px solid var(--pen); outline-offset:3px; }
 
-.contact-detail{
-  display:flex; flex-wrap:wrap; gap:0 40px;
-  margin-top:30px; padding-top:24px; border-top:1px solid var(--rule);
-}
-.contact-detail div{ display:flex; align-items:baseline; gap:12px; padding:5px 0; }
-.contact-detail dt{
-  font-family:var(--mono); font-size:10.5px; letter-spacing:.12em;
-  text-transform:uppercase; color:var(--ink-soft); min-width:52px;
-}
-.contact-detail dd{ margin:0; font-family:var(--mono); font-size:14px; }
-.contact-detail dd a{ text-decoration:none; border-bottom:1px solid var(--rule); padding-bottom:2px; }
-.contact-detail dd a:hover{ border-color:var(--pen); color:var(--pen); }
-
 footer{
   border-top:1px solid var(--rule); margin-top:40px;
   padding:22px 0 46px; display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
@@ -314,7 +313,6 @@ footer{
       <a href="#path">경로</a>
       <a href="#bridge">전환</a>
       <a href="#work">작업</a>
-      <a href="#contact">연락</a>
     </nav>
   </div>
 </div>
@@ -346,6 +344,18 @@ footer{
       <span class="tag">메타데이터 · 지식맵 설계</span>
       <span class="tag">데이터 기반 품질 관리</span>
       <span class="tag">AI 도구 활용</span>
+    </div>
+
+    <div class="hero-contact">
+      <a href="mailto:kwangjin.owl@gmail.com">kwangjin.owl@gmail.com</a>
+      <span class="sep">·</span>
+      <!-- ▼ 실제 번호로 교체 (tel: 뒤 숫자도 함께) -->
+      <a href="tel:010-XXXX-XXXX">010-XXXX-XXXX</a>
+      <span class="sep">·</span>
+      <a href="https://github.com/kwangjin-owl" target="_blank" rel="noopener">GitHub</a>
+      <span class="sep">·</span>
+      <!-- ▼ 포트폴리오 PDF 경로로 교체 (예: ./portfolio.pdf) -->
+      <a href="#">포트폴리오 PDF</a>
     </div>
   </header>
 
@@ -590,34 +600,20 @@ footer{
     </div>
   </section>
 
-  <!-- 연락 -->
-  <section class="shell contact" id="contact">
+  <!-- 마무리 -->
+  <section class="shell contact" id="outro">
     <div class="reveal">
-      <span class="eyebrow">06 — Contact</span>
+      <span class="eyebrow">06 — Closing</span>
       <h2 style="margin-top:16px;">교육과 서비스, 양쪽 언어를 옮기는 일을 계속하고 싶습니다.</h2>
       <div class="contact-links">
         <a class="btn" href="mailto:kwangjin.owl@gmail.com">메일 보내기</a>
         <a class="btn ghost" href="https://github.com/kwangjin-owl" target="_blank" rel="noopener">GitHub</a>
-        <!-- ▼ 포트폴리오 PDF 경로로 교체 (repo에 파일 업로드 후 ./portfolio.pdf) -->
-        <a class="btn ghost" href="#">포트폴리오 PDF</a>
       </div>
-
-      <dl class="contact-detail">
-        <div>
-          <dt>Email</dt>
-          <dd><a href="mailto:kwangjin.owl@gmail.com">kwangjin.owl@gmail.com</a></dd>
-        </div>
-        <div>
-          <dt>Mobile</dt>
-          <!-- ▼ 실제 번호로 교체 (tel: 뒤의 숫자도 함께) -->
-          <dd><a href="tel:010-XXXX-XXXX">010-XXXX-XXXX</a></dd>
-        </div>
-      </dl>
     </div>
 
     <footer>
       <span class="code">김광진 · 교육 콘텐츠 기획</span>
-      <span class="code" id="yr"></span>
+      <span class="code">build 5 · <span id="yr"></span></span>
     </footer>
   </section>
 
