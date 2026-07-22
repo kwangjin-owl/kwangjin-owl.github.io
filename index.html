@@ -1,512 +1,548 @@
 <!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>자기소개 | 김광진</title>
-  <meta name="description" content="간단한 1페이지 자기소개 웹페이지" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>김광진 · 교육 콘텐츠 기획</title>
+<meta name="description" content="초등 수학 디지털 교육 콘텐츠를 기획하고, 메타데이터와 지식맵을 설계하고, 출시 이후의 품질까지 책임져 온 기획자." />
 
-  <style>
-    :root{
-      --bg: #0b1220;
-      --card: rgba(255,255,255,0.08);
-      --text: #eaf0ff;
-      --muted: rgba(234,240,255,0.7);
-      --line: rgba(234,240,255,0.16);
-      --accent: #7c5cff;
-      --accent2: #32d6ff;
-      --radius: 16px;
-    }
+<!-- ═══════════════════════════════════════════════════════════
+     ▼ 여기만 채우면 됩니다 (Ctrl+F 로 찾기)
+     1. EMAIL      : 아래 본문의  you@example.com  → 실제 메일
+     2. GITHUB     : href="#"     → 본인 깃허브 주소
+     3. 포트폴리오 PDF : href="#"  → PDF를 repo에 올린 뒤 경로 (예: ./portfolio.pdf)
+     4. 회사명은 전부 익명 처리했습니다. 공개하고 싶으면 .node-org 텍스트만 교체
+     ═══════════════════════════════════════════════════════════ -->
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body{
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", Arial, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(1200px 700px at 15% 10%, rgba(124,92,255,0.35), transparent 60%),
-        radial-gradient(900px 600px at 85% 25%, rgba(50,214,255,0.22), transparent 55%),
-        radial-gradient(900px 700px at 50% 110%, rgba(255,255,255,0.08), transparent 55%),
-        var(--bg);
-      line-height: 1.6;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 
-    a { color: inherit; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+<style>
+:root{
+  --paper:      #F7F7F3;
+  --paper-deep: #EFEFE8;
+  --ink:        #1B2430;
+  --ink-soft:   #5D6674;
+  --rule:       #DCDCD2;
+  --pen:        #CE3F2A;   /* 빨간펜 = 검수 */
+  --mark:       #FFE9A0;   /* 형광펜 */
 
-    .wrap{
-      width: min(980px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 28px 0 60px;
-    }
+  --serif: 'Gowun Batang', 'Nanum Myeongjo', serif;
+  --sans:  'Pretendard', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono:  'IBM Plex Mono', ui-monospace, monospace;
 
-    header{
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(11,18,32,0.8), rgba(11,18,32,0));
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      z-index: 10;
-    }
+  --pad: clamp(20px, 5vw, 64px);
+}
 
-    .nav{
-      width: min(980px, calc(100% - 40px));
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 0;
-      gap: 12px;
-    }
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family:var(--sans);
+  color:var(--ink);
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size:26px 26px;
+  background-position:-1px -1px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background:radial-gradient(120% 80% at 50% 0%, rgba(247,247,243,.55), var(--paper) 62%);
+  pointer-events:none; z-index:0;
+}
+.shell{ position:relative; z-index:1; width:min(1060px, 100% - 2 * var(--pad)); margin-inline:auto; }
 
-    .brand{
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-    }
+a{ color:inherit; }
+h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 
-    .dot{
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 18px rgba(124,92,255,0.55);
-    }
+/* ── 라벨 / 유틸 타입 ───────────────────────────── */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink-soft);
+}
+.code{ font-family:var(--mono); font-size:12px; color:var(--ink-soft); }
 
-    .links{
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
+/* ── 상단 바 ────────────────────────────────────── */
+.topbar{
+  position:sticky; top:0; z-index:20;
+  background:rgba(247,247,243,.86);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.topbar-in{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:13px 0;
+}
+.mark-name{ font-family:var(--serif); font-size:17px; font-weight:700; letter-spacing:.02em; }
+.mark-name span{ color:var(--pen); }
+.topnav{ display:flex; gap:22px; }
+.topnav a{
+  font-size:13px; color:var(--ink-soft); text-decoration:none;
+  padding-bottom:2px; border-bottom:1px solid transparent;
+}
+.topnav a:hover{ color:var(--ink); border-color:var(--pen); }
+@media (max-width:640px){ .topnav{ display:none; } }
 
-    .chip{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      border-radius: 999px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-    .chip:hover{
-      border-color: rgba(255,255,255,0.22);
-      background: rgba(255,255,255,0.06);
-      text-decoration: none;
-      color: var(--text);
-    }
+/* ── 히어로 ─────────────────────────────────────── */
+.hero{ padding:clamp(64px, 12vw, 132px) 0 clamp(48px, 8vw, 88px); }
+.hero-eyebrow{ display:flex; align-items:center; gap:12px; margin-bottom:26px; }
+.hero-eyebrow::after{ content:""; flex:1; height:1px; background:var(--rule); }
 
-    .hero{
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 18px;
-      margin-top: 26px;
-    }
-    @media (max-width: 820px){
-      .hero{ grid-template-columns: 1fr; }
-    }
+.hero h1{
+  font-family:var(--serif);
+  font-size:clamp(34px, 6.4vw, 62px);
+  line-height:1.28;
+  letter-spacing:-.01em;
+  max-width:16ch;
+}
+.circled{ position:relative; display:inline-block; white-space:nowrap; }
+.circled svg{
+  position:absolute; left:50%; top:50%;
+  width:126%; height:196%;
+  transform:translate(-50%,-52%);
+  overflow:visible; pointer-events:none;
+}
+.circled path{
+  fill:none; stroke:var(--pen); stroke-width:3.4;
+  stroke-linecap:round; opacity:.9;
+  stroke-dasharray:900; stroke-dashoffset:900;
+  animation:draw 1.15s cubic-bezier(.6,.1,.3,1) .5s forwards;
+}
+@keyframes draw{ to{ stroke-dashoffset:0; } }
 
-    .card{
-      border: 1px solid rgba(255,255,255,0.12);
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: 0 18px 50px rgba(0,0,0,0.25);
-    }
+.hero-lede{
+  margin:30px 0 0; max-width:52ch;
+  font-size:clamp(15px, 1.6vw, 17px); color:var(--ink-soft);
+}
+.tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:32px; }
+.tag{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.02em;
+  padding:6px 11px; border:1px solid var(--rule); border-radius:2px;
+  background:#fff; color:var(--ink-soft);
+}
 
-    h1{
-      margin: 0 0 8px;
-      font-size: clamp(26px, 4vw, 40px);
-      line-height: 1.15;
-      letter-spacing: -0.2px;
-    }
+/* ── 숫자 스트립 ────────────────────────────────── */
+.figures{
+  display:grid; grid-template-columns:repeat(4, 1fr);
+  border-top:1.5px solid var(--ink); border-bottom:1px solid var(--rule);
+}
+.fig{ padding:26px 20px 24px; border-left:1px solid var(--rule); }
+.fig:first-child{ border-left:0; padding-left:0; }
+.fig-n{ font-family:var(--serif); font-size:clamp(23px, 3.2vw, 33px); line-height:1.1; display:block; }
+.fig-n em{ font-style:normal; font-size:.58em; margin-left:2px; color:var(--ink-soft); }
+.fig-l{ display:block; margin-top:9px; font-size:12.5px; color:var(--ink-soft); }
+@media (max-width:720px){
+  .figures{ grid-template-columns:1fr 1fr; }
+  .fig{ padding:20px 16px; }
+  .fig:nth-child(odd){ border-left:0; padding-left:0; }
+  .fig:nth-child(n+3){ border-top:1px solid var(--rule); }
+}
 
-    .subtitle{
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 15px;
-    }
+/* ── 섹션 공통 ──────────────────────────────────── */
+.band{ padding:clamp(60px, 9vw, 104px) 0; }
+.band-head{ margin-bottom:clamp(30px, 4vw, 46px); }
+.band-head h2{
+  font-family:var(--serif); font-size:clamp(24px, 3.4vw, 33px);
+  margin-top:14px; line-height:1.4;
+}
+.band-head p{ margin:12px 0 0; max-width:50ch; color:var(--ink-soft); font-size:14.5px; }
 
-    .badges{
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-    .badge{
-      font-size: 13px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.05);
-      color: var(--muted);
-    }
+/* ── 역량 ───────────────────────────────────────── */
+.skills{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--rule); border:1px solid var(--rule); }
+.skill{ background:var(--paper); padding:28px clamp(20px,3vw,32px); }
+.skill h3{ font-size:16.5px; margin-bottom:14px; display:flex; align-items:baseline; gap:10px; }
+.skill h3 .code{ font-size:11px; }
+.skill ul{ margin:0; padding:0; list-style:none; }
+.skill li{
+  position:relative; padding-left:16px; margin-bottom:8px;
+  font-size:14px; color:var(--ink-soft);
+}
+.skill li::before{
+  content:""; position:absolute; left:0; top:11px;
+  width:5px; height:5px; border-radius:50%; background:var(--pen); opacity:.55;
+}
+@media (max-width:720px){ .skills{ grid-template-columns:1fr; } }
 
-    .grid{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      margin-top: 18px;
-    }
-    @media (max-width: 820px){
-      .grid{ grid-template-columns: 1fr; }
-    }
+/* ── 계통도(경력) — 시그니처 ────────────────────── */
+.tree{ position:relative; padding-left:clamp(96px, 13vw, 150px); }
+.tree::before{
+  content:""; position:absolute; left:clamp(52px, 7.5vw, 84px); top:14px; bottom:70px;
+  width:1.5px; background:var(--ink); opacity:.22;
+}
+.stage{
+  position:absolute; left:0; width:clamp(46px, 7vw, 76px);
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.08em;
+  color:var(--ink-soft); text-align:right; padding-right:14px; line-height:1.5;
+}
+.node{ position:relative; padding-bottom:44px; }
+.node:last-child{ padding-bottom:0; }
+.node::before{  /* 계통도 노드 */
+  content:""; position:absolute;
+  left:calc(-1 * clamp(96px, 13vw, 150px) + clamp(52px, 7.5vw, 84px) - 5px);
+  top:9px; width:11px; height:11px; border-radius:50%;
+  background:var(--paper); border:1.5px solid var(--ink);
+}
+.node.now::before{ background:var(--pen); border-color:var(--pen); }
+.node.next::before{ border-style:dashed; border-color:var(--pen); background:var(--paper); }
+.node-yr{ font-family:var(--mono); font-size:12px; color:var(--ink-soft); }
+.node-role{ font-family:var(--serif); font-size:clamp(18px,2.4vw,22px); margin:5px 0 2px; }
+.node-org{ font-size:13px; color:var(--ink-soft); }
+.node-body{ margin:14px 0 0; font-size:14.5px; color:var(--ink-soft); max-width:56ch; }
+.node.next .node-role{ color:var(--pen); }
+.node-mark{ background:linear-gradient(transparent 62%, var(--mark) 62%); padding:0 1px; color:var(--ink); }
+@media (max-width:640px){
+  .tree{ padding-left:26px; }
+  .tree::before{ left:4px; }
+  .node::before{ left:-27px; }
+  .stage{ display:none; }
+}
 
-    h2{
-      margin: 0 0 10px;
-      font-size: 18px;
-      letter-spacing: -0.1px;
-    }
-    p{ margin: 0; color: var(--muted); }
+/* ── 작업 ───────────────────────────────────────── */
+.works{ display:grid; gap:18px; }
+.work{
+  background:#fff; border:1px solid var(--rule); border-radius:3px;
+  padding:clamp(24px,3.4vw,34px);
+  display:grid; grid-template-columns:1fr 260px; gap:clamp(20px,4vw,44px);
+}
+.work h3{ font-family:var(--serif); font-size:clamp(19px,2.5vw,23px); margin:10px 0 12px; }
+.work p{ margin:0; font-size:14.5px; color:var(--ink-soft); }
+.work-meta{ border-left:1px solid var(--rule); padding-left:clamp(18px,2.5vw,28px); }
+.work-meta dl{ margin:0; }
+.work-meta dt{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:var(--ink-soft); text-transform:uppercase; }
+.work-meta dd{ margin:4px 0 16px; font-size:14px; }
+.work-meta dd:last-of-type{ margin-bottom:0; }
+.outcome{ color:var(--pen); font-weight:600; }
+@media (max-width:760px){
+  .work{ grid-template-columns:1fr; }
+  .work-meta{ border-left:0; border-top:1px solid var(--rule); padding:20px 0 0; }
+  .work-meta dd{ margin-bottom:12px; }
+}
 
-    .list{
-      margin: 0;
-      padding-left: 18px;
-      color: var(--muted);
-    }
-    .list li{ margin: 6px 0; }
+/* ── 도구 ───────────────────────────────────────── */
+.tools{ display:flex; flex-wrap:wrap; gap:10px; }
+.tool{
+  font-size:13.5px; padding:8px 14px;
+  border:1px solid var(--rule); border-radius:999px; background:#fff;
+}
 
-    .profile{
-      display: grid;
-      gap: 12px;
-      align-content: start;
-    }
+/* ── 연락 ───────────────────────────────────────── */
+.contact{ border-top:1.5px solid var(--ink); padding:clamp(48px,7vw,76px) 0 40px; }
+.contact h2{ font-family:var(--serif); font-size:clamp(24px,3.6vw,34px); line-height:1.45; max-width:20ch; }
+.contact-links{ display:flex; flex-wrap:wrap; gap:10px; margin-top:32px; }
+.btn{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:12px 20px; border-radius:3px; font-size:14px; text-decoration:none;
+  border:1px solid var(--ink); background:var(--ink); color:var(--paper);
+  transition:transform .15s ease, background .15s ease;
+}
+.btn.ghost{ background:transparent; color:var(--ink); }
+.btn:hover{ transform:translateY(-1px); }
+.btn.ghost:hover{ background:#fff; }
+.btn:focus-visible, .topnav a:focus-visible{ outline:2px solid var(--pen); outline-offset:3px; }
 
-    .avatar{
-      width: 88px; height: 88px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background:
-        radial-gradient(circle at 30% 20%, rgba(124,92,255,0.6), transparent 55%),
-        radial-gradient(circle at 70% 70%, rgba(50,214,255,0.45), transparent 55%),
-        rgba(255,255,255,0.06);
-    }
+footer{
+  border-top:1px solid var(--rule); margin-top:40px;
+  padding:22px 0 46px; display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+}
 
-    .kvs{
-      display: grid;
-      gap: 10px;
-      border-top: 1px solid rgba(255,255,255,0.10);
-      padding-top: 12px;
-      margin-top: 6px;
-    }
-
-    .kv{
-      display: grid;
-      grid-template-columns: 88px 1fr;
-      gap: 10px;
-      align-items: center;
-    }
-    .k{ color: rgba(234,240,255,0.65); font-size: 13px; }
-    .v{ color: var(--text); font-size: 14px; }
-
-    .btns{
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .btn{
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      font-size: 14px;
-      cursor: pointer;
-      user-select: none;
-    }
-    .btn.primary{
-      border-color: rgba(124,92,255,0.55);
-      background: linear-gradient(135deg, rgba(124,92,255,0.35), rgba(50,214,255,0.18));
-    }
-    .btn:hover{ background: rgba(255,255,255,0.08); text-decoration: none; }
-
-    footer{
-      margin-top: 22px;
-      color: rgba(234,240,255,0.55);
-      font-size: 13px;
-      text-align: center;
-    }
-
-    /* 모달 */
-    dialog{
-      width: min(560px, calc(100% - 32px));
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 16px;
-      padding: 0;
-      background: rgba(15,24,44,0.92);
-      color: var(--text);
-      box-shadow: 0 30px 90px rgba(0,0,0,0.5);
-    }
-    dialog::backdrop{
-      background: rgba(0,0,0,0.55);
-    }
-    .modal{
-      padding: 16px;
-    }
-    .modal header{
-      position: static;
-      background: transparent;
-      border: 0;
-      padding: 0;
-      margin-bottom: 10px;
-    }
-    .modal h3{ margin: 0 0 6px; }
-    .modal p{ margin: 0 0 12px; color: var(--muted); }
-    .modal .row{
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
-    }
-    .modal input, .modal textarea{
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.06);
-      color: var(--text);
-      outline: none;
-    }
-    .modal textarea{ min-height: 100px; resize: vertical; }
-    .modal .actions{
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 10px;
-    }
-  </style>
+/* ── 등장 ───────────────────────────────────────── */
+.reveal{ opacity:0; transform:translateY(12px); }
+.reveal.in{ opacity:1; transform:none; transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.3,1); }
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .reveal{ opacity:1; transform:none; }
+  .circled path{ animation:none; stroke-dashoffset:0; }
+}
+</style>
 </head>
 
 <body>
-  <header>
-    <div class="nav">
-      <div class="brand">
-        <span class="dot" aria-hidden="true"></span>
-        <span id="brandName">김광진</span>
-      </div>
-      <nav class="links" aria-label="빠른 이동">
-        <a class="chip" href="#about">소개</a>
-        <a class="chip" href="#skills">스킬</a>
-        <a class="chip" href="#projects">프로젝트</a>
-        <a class="chip" href="#contact">연락</a>
-      </nav>
+
+<div class="topbar">
+  <div class="shell topbar-in">
+    <div class="mark-name">김광진<span>.</span></div>
+    <nav class="topnav" aria-label="섹션 이동">
+      <a href="#what">하는 일</a>
+      <a href="#path">경로</a>
+      <a href="#work">작업</a>
+      <a href="#contact">연락</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+
+  <!-- 히어로 -->
+  <header class="shell hero">
+    <div class="hero-eyebrow">
+      <span class="eyebrow">Education Content Planner · 10 yrs</span>
+    </div>
+
+    <h1>
+      콘텐츠는 출시된 뒤에도<br />
+      <span class="circled">신뢰받을 때<svg viewBox="0 0 320 96" aria-hidden="true"><path d="M308 32C266 8 132 2 68 16 10 29 6 62 66 78c74 20 218 14 240-12 9-11 2-24-40-33"/></svg></span> 완성된다.
+    </h1>
+
+    <p class="hero-lede">
+      초등 수학을 중심으로 디지털 교육 콘텐츠를 기획해 왔습니다.
+      커리큘럼과 학습 차시, 문항의 메타데이터를 설계하고,
+      서비스에 올라간 뒤에도 오류가 남지 않도록 품질을 관리합니다.
+    </p>
+
+    <div class="tags">
+      <span class="tag">디지털 교육 콘텐츠 기획</span>
+      <span class="tag">메타데이터 · 지식맵 설계</span>
+      <span class="tag">데이터 기반 품질 관리</span>
+      <span class="tag">AI 도구 활용</span>
     </div>
   </header>
 
-  <main class="wrap">
-    <section class="hero">
-      <div class="card">
-        <h1>
-          안녕하세요, <span id="nameInline">김광진</span>입니다.
-        </h1>
-        <p class="subtitle" id="headline">
-          AI 프로덕트 매니저 직무를 알아보고 있습니다.
-        </p>
+  <!-- 숫자 -->
+  <section class="shell figures reveal" aria-label="주요 숫자">
+    <div class="fig"><span class="fig-n">10<em>년</em></span><span class="fig-l">교육 콘텐츠 기획·검수</span></div>
+    <div class="fig"><span class="fig-n">680<em>개</em></span><span class="fig-l">직접 정의한 지식 개념 코드</span></div>
+    <div class="fig"><span class="fig-n">33,972<em>문항</em></span><span class="fig-l">메타데이터 설계·적용</span></div>
+    <div class="fig"><span class="fig-n">252<em>차시</em></span><span class="fig-l">AI 디지털교과서 개발·심사 제출</span></div>
+  </section>
 
-        <div class="badges" aria-label="키워드">
-          <span class="badge">AI Product Manager</span>
-          <span class="badge">Product Discovery</span>
-          <span class="badge">Data-Driven</span>
-          <span class="badge">Problem Solving</span>
-        </div>
+  <!-- 하는 일 -->
+  <section class="shell band" id="what">
+    <div class="band-head reveal">
+      <span class="eyebrow">01 — What I do</span>
+      <h2>기획에서 끝내지 않고,<br />출시 이후의 품질까지 봅니다.</h2>
+      <p>제가 다룬 콘텐츠는 대부분 심사에 제출하거나 그대로 서비스되는 것이라, 만드는 일만큼 점검하는 일이 중요했습니다.</p>
+    </div>
 
-        <div class="btns">
-          <a class="btn primary" href="#projects">프로젝트 보기</a>
-          <button class="btn" id="copyEmailBtn" type="button">이메일 복사</button>
-          <button class="btn" id="openMsgBtn" type="button">메시지 남기기</button>
-        </div>
-      </div>
-
-      <aside class="card profile" aria-label="프로필 요약">
-        <div style="display:flex; gap:12px; align-items:center;">
-          <div class="avatar" aria-hidden="true"></div>
-          <div>
-            <div style="font-weight:700; font-size:16px;" id="profileName">김광진</div>
-            <div style="color: var(--muted); font-size: 14px;" id="roleLine">AI 프로덕트 매니저 지망</div>
-          </div>
-        </div>
-
-        <div class="kvs">
-          <div class="kv">
-            <div class="k">관심사</div>
-            <div class="v">AI 프로덕트 전략, 사용자 문제 정의, 지표 설계</div>
-          </div>
-          <div class="kv">
-            <div class="k">거주</div>
-            <div class="v">Seoul, KR</div>
-          </div>
-          <div class="kv">
-            <div class="k">이메일</div>
-            <div class="v"><span id="emailText">hong@example.com</span></div>
-          </div>
-          <div class="kv">
-            <div class="k">링크</div>
-            <div class="v">
-              <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-              <span style="opacity:.5;"> · </span>
-              <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
-            </div>
-          </div>
-        </div>
-      </aside>
-    </section>
-
-    <section class="grid">
-      <section class="card" id="about">
-        <h2>소개</h2>
-        <p>
-          짧은 자기소개를 적어보세요. 예: “사용자에게 더 빠르고 편한 경험을 제공하는 것”에 관심이 많고,
-          작은 UI 디테일부터 전체 성능 최적화까지 꾸준히 개선하는 것을 좋아합니다.
-        </p>
-      </section>
-
-      <section class="card" id="skills">
-        <h2>스킬</h2>
-        <ul class="list">
-          <li>HTML/CSS: 반응형 레이아웃, 접근성 기본</li>
-          <li>JavaScript: DOM 조작, 이벤트 처리, 간단한 컴포넌트 구현</li>
-          <li>도구: Git, Chrome DevTools</li>
+    <div class="skills reveal">
+      <article class="skill">
+        <h3>콘텐츠 기획 <span class="code">A</span></h3>
+        <ul>
+          <li>국정·검정 커리큘럼 기반 디지털 학습 콘텐츠 설계</li>
+          <li>애니메이션·인터랙티브·게임·챗봇·문항 등 형식별 기획</li>
+          <li>학습 목적과 실행 흐름 기준의 학습 모듈 구조 정리</li>
         </ul>
-      </section>
-
-      <section class="card" id="projects">
-        <h2>프로젝트</h2>
-        <ul class="list">
-          <li><b>프로젝트 A</b> — 한 줄 설명 (예: ToDo 웹앱, 로컬스토리지 저장)</li>
-          <li><b>프로젝트 B</b> — 한 줄 설명 (예: 영화 검색 UI, API 연동)</li>
-          <li><b>프로젝트 C</b> — 한 줄 설명 (예: 포트폴리오 사이트, 배포)</li>
+      </article>
+      <article class="skill">
+        <h3>메타데이터 · 지식맵 <span class="code">B</span></h3>
+        <ul>
+          <li>커리큘럼–차시–문항의 위계 설계 및 메타데이터 관리</li>
+          <li>선후행 관계로 연결한 초등 전 과정 수학 계통도 구축</li>
+          <li>교육과정 표준분류체계 기반 개념 코드 세분화</li>
         </ul>
-      </section>
+      </article>
+      <article class="skill">
+        <h3>품질 관리 <span class="code">C</span></h3>
+        <ul>
+          <li>출시 전 표현·구조·사용성 전수 점검 및 수정·보완</li>
+          <li>수정·보완 대조표 기반 개정 운영</li>
+          <li>서비스·개발 조직과 협업해 구현 결과까지 확인</li>
+        </ul>
+      </article>
+      <article class="skill">
+        <h3>데이터 · AI 활용 <span class="code">D</span></h3>
+        <ul>
+          <li>정답률·난이도 이상치 분석으로 취약 영역 도출</li>
+          <li>분석 결과를 보완 콘텐츠 기획으로 연결</li>
+          <li>반복 제작·검수 업무를 AI 도구로 자동화</li>
+        </ul>
+      </article>
+    </div>
+  </section>
 
-      <section class="card" id="contact">
-        <h2>연락</h2>
-        <p>
-          협업/채용/스터디 등 편하게 연락 주세요. <br />
-          이메일: <b id="emailBold">hong@example.com</b>
-        </p>
-      </section>
-    </section>
+  <!-- 경로: 계통도 -->
+  <section class="shell band" id="path">
+    <div class="band-head reveal">
+      <span class="eyebrow">02 — Path</span>
+      <h2>제가 만든 지식맵의 방식대로,<br />경력도 선후행으로 이어져 있습니다.</h2>
+      <p>앞의 경험이 다음 일의 선행 학습이 되는 구조로 일해 왔습니다.</p>
+    </div>
 
-    <footer>
-      <span id="year"></span> © <span id="footerName">김광진</span>. All rights reserved.
-    </footer>
-  </main>
+    <div class="tree reveal">
+      <span class="stage" style="top:0;">선행 학습</span>
 
-  <!-- 메시지 모달 -->
-  <dialog id="msgDialog" aria-label="메시지 남기기">
-    <div class="modal">
-      <header>
-        <h3>메시지 남기기</h3>
-        <p>실제로 전송되지는 않고, 입력한 내용을 화면에만 보여주는 데모입니다.</p>
-      </header>
-
-      <div class="row">
-        <input id="fromInput" type="text" placeholder="이름(또는 닉네임)" />
-        <textarea id="msgInput" placeholder="메시지를 입력하세요"></textarea>
+      <div class="node">
+        <span class="node-yr">2016 — 2017</span>
+        <h3 class="node-role">융합 교육 콘텐츠 기획</h3>
+        <span class="node-org">교육 콘텐츠 기업 · 콘텐츠 개발팀</span>
+        <p class="node-body">수학·과학·코딩·피지컬 컴퓨팅 콘텐츠를 기획하고 현장에서 직접 강의했습니다. 교재 6권 기획·ISBN 등록. <span class="node-mark">배우는 사람 앞에서 콘텐츠를 검증하는 습관</span>이 여기서 생겼습니다.</p>
       </div>
 
-      <div class="actions">
-        <button class="btn" id="closeDialogBtn" type="button">닫기</button>
-        <button class="btn primary" id="previewBtn" type="button">미리보기</button>
+      <div class="node">
+        <span class="node-yr">2017 — 2021</span>
+        <h3 class="node-role">학습 플랫폼 콘텐츠 기획·운영</h3>
+        <span class="node-org">초등 학습 플랫폼 기업 · 콘텐츠 기획실 수학팀</span>
+        <p class="node-body">개념–평가–심화로 이어지는 학습 흐름을 설계하고, 문제은행 기반으로 문항 메타데이터를 관리했습니다. 문항 기준 Q&amp;A 대응 체계를 만들어 응답 시간과 반복 문의를 줄였습니다.</p>
       </div>
 
-      <div id="previewArea" style="margin-top:12px; display:none;">
-        <div style="border-top:1px solid rgba(255,255,255,0.12); padding-top:12px;">
-          <div style="font-size:13px; color: rgba(234,240,255,0.65);">미리보기</div>
-          <div id="previewText" style="margin-top:6px; white-space:pre-wrap;"></div>
-        </div>
+      <span class="stage" style="top:calc(50% - 10px);">본 학습</span>
+
+      <div class="node now">
+        <span class="node-yr">2021 — 2025</span>
+        <h3 class="node-role">AI 디지털교과서 · 지식맵 설계</h3>
+        <span class="node-org">대형 에듀테크 기업 · 디지털교과서 개발실 / 학습개발실</span>
+        <p class="node-body">초등 수학 3~6학년 AI 디지털교과서를 기획·검수하고, 교육과정 표준체계 기반으로 학습맵을 세분화했습니다. 학습 데이터를 분석해 문항을 교체하고, 초등 전 과정 <span class="node-mark">수학 지식 개념맵을 직접 설계</span>했습니다.</p>
+      </div>
+
+      <div class="node">
+        <span class="node-yr">2025</span>
+        <h3 class="node-role">특수교육 AI 디지털교과서 커리큘럼</h3>
+        <span class="node-org">글로벌 에듀테크 기업 · 수학 커리큘럼 디자이너</span>
+        <p class="node-body">접근성과 인지 부담을 기준으로 3~4학년 전체 커리큘럼을 설계하고, 의사소통판(AAC)을 반영했습니다. 반복 작업은 스크립트와 AI 도구로 자동화해 검수에 시간을 더 썼습니다.</p>
+      </div>
+
+      <div class="node">
+        <span class="node-yr">2026</span>
+        <h3 class="node-role">신규 학습 서비스 PM</h3>
+        <span class="node-org">학습 서비스 기업 · 서비스 기획팀 (계약)</span>
+        <p class="node-body">학습 모듈 구조를 콘텐츠 형식이 아닌 학습 목적과 실행 흐름 기준으로 다시 정리하고, 개발·디자인 요청서를 작성했습니다. 콘텐츠팀과 기획팀 사이의 요구사항을 옮기고 조율했습니다.</p>
+      </div>
+
+      <span class="stage" style="bottom:60px;">후속 학습</span>
+
+      <div class="node next">
+        <span class="node-yr">NEXT</span>
+        <h3 class="node-role">AI 프로덕트 매니저</h3>
+        <span class="node-org">현재 학습 중</span>
+        <p class="node-body">콘텐츠와 데이터, 서비스 구조를 모두 다뤄 본 사람으로서 사용자 문제를 정의하고 지표로 검증하는 일을 하려 합니다.</p>
       </div>
     </div>
-  </dialog>
+  </section>
 
-  <script>
-    // ====== 여기만 바꾸면 빠르게 커스터마이징 가능 ======
-    const PROFILE = {
-      name: "김광진",
-      role: "AI 프로덕트 매니저 지망",
-      headline: "AI 프로덕트 매니저 직무를 알아보고 있습니다.",
-      email: "hong@example.com",
-      location: "Seoul, KR",
-      interests: "AI 프로덕트 전략, 사용자 문제 정의, 지표 설계",
-      links: {
-        github: "https://github.com/",
-        linkedin: "https://www.linkedin.com/"
-      }
-    };
-    // ====================================================
+  <!-- 작업 -->
+  <section class="shell band" id="work">
+    <div class="band-head reveal">
+      <span class="eyebrow">03 — Selected work</span>
+      <h2>대표 작업</h2>
+      <p>회사와 서비스명은 생략했습니다. 상세 화면과 결과는 포트폴리오에서 볼 수 있습니다.</p>
+    </div>
 
-    // 텍스트 바인딩
-    document.getElementById("brandName").textContent = PROFILE.name;
-    document.getElementById("nameInline").textContent = PROFILE.name;
-    document.getElementById("profileName").textContent = PROFILE.name;
-    document.getElementById("footerName").textContent = PROFILE.name;
+    <div class="works">
+      <article class="work reveal">
+        <div>
+          <span class="eyebrow">지식 구조 설계</span>
+          <h3>초등 1~6학년 수학 지식 개념맵</h3>
+          <p>학년별로 흩어져 있던 수학 개념을 선후행 관계로 연결해 계통도로 그리고, 개념마다 코드를 부여했습니다. 콘텐츠를 개념 단위로 모듈화해 개인화 학습 추천의 기반을 만들었습니다.</p>
+        </div>
+        <div class="work-meta">
+          <dl>
+            <dt>Role</dt><dd>구조 설계 · 코드 체계 정의</dd>
+            <dt>Scale</dt><dd>680개 개념 코드 / 33,972문항 적용</dd>
+            <dt>Outcome</dt><dd class="outcome">콘텐츠 관리 효율 향상 및 개인화 학습 기반 확보</dd>
+          </dl>
+        </div>
+      </article>
 
-    document.getElementById("roleLine").textContent = PROFILE.role;
-    document.getElementById("headline").textContent = PROFILE.headline;
+      <article class="work reveal">
+        <div>
+          <span class="eyebrow">콘텐츠 기획 · 검수</span>
+          <h3>초등 수학 AI 디지털교과서</h3>
+          <p>학기별 학습 코스를 설계하고, 보편적 학습 설계(UDL)와 접근성 지침을 반영해 콘텐츠를 구성했습니다. 출시 전 표현·구조·사용성을 전수 점검해 심사 제출본의 완성도를 맞췄습니다.</p>
+        </div>
+        <div class="work-meta">
+          <dl>
+            <dt>Role</dt><dd>기획 · 메타데이터 설계 · 품질 검수</dd>
+            <dt>Scale</dt><dd>3~4학년 252차시 / 4,590문항</dd>
+            <dt>Outcome</dt><dd class="outcome">전 차시 개발 완료 및 검정심사 제출</dd>
+          </dl>
+        </div>
+      </article>
 
-    document.getElementById("emailText").textContent = PROFILE.email;
-    document.getElementById("emailBold").textContent = PROFILE.email;
+      <article class="work reveal">
+        <div>
+          <span class="eyebrow">데이터 기반 기획</span>
+          <h3>취약 영역 보완 학습 게임</h3>
+          <p>평가 데이터에서 난이도 대비 정답률이 크게 어긋나는 구간을 찾아, 학습자가 가장 어려워하는 단원을 게임 형태의 콘텐츠로 다시 설계했습니다. 레벨업·랭킹·시즌제 등으로 반복 학습 동기를 만들었습니다.</p>
+        </div>
+        <div class="work-meta">
+          <dl>
+            <dt>Role</dt><dd>데이터 분석 · 콘텐츠 기획</dd>
+            <dt>Scale</dt><dd>스테이지 61개 / 3,700문항</dd>
+            <dt>Outcome</dt><dd class="outcome">콘텐츠 복습률 최대 95%</dd>
+          </dl>
+        </div>
+      </article>
 
-    // 프로필 요약(관심사/거주) 업데이트
-    // 간단 구현: kv 순서에 의존(필요하면 id 부여해서 더 안전하게 처리 가능)
-    const kvValues = document.querySelectorAll(".kvs .kv .v");
-    kvValues[0].textContent = PROFILE.interests;
-    kvValues[1].textContent = PROFILE.location;
+      <article class="work reveal">
+        <div>
+          <span class="eyebrow">업무 자동화</span>
+          <h3>제작·검수 자동화 도구</h3>
+          <p>사람이 반복해서 틀리는 지점을 도구로 옮겼습니다. 문항 메타데이터를 자동으로 매칭하는 스크립트, 사칙연산식 생성기, 파일명 대조 도구를 직접 만들어 제작과 검수에 사용했습니다.</p>
+        </div>
+        <div class="work-meta">
+          <dl>
+            <dt>Role</dt><dd>프로세스 설계 · 도구 제작</dd>
+            <dt>Stack</dt><dd>Apps Script · ChatGPT · Claude</dd>
+            <dt>Outcome</dt><dd class="outcome">반복 입력 작업 제거, 검수 시간 확보</dd>
+          </dl>
+        </div>
+      </article>
+    </div>
+  </section>
 
-    // 링크 업데이트
-    const linkEls = document.querySelectorAll('.kvs a[target="_blank"]');
-    linkEls[0].href = PROFILE.links.github;
-    linkEls[1].href = PROFILE.links.linkedin;
+  <!-- 도구 -->
+  <section class="shell band" id="tools" style="padding-top:0;">
+    <div class="band-head reveal">
+      <span class="eyebrow">04 — Tools</span>
+      <h2>쓰는 도구</h2>
+    </div>
+    <div class="tools reveal">
+      <span class="tool">Tableau</span>
+      <span class="tool">draw.io</span>
+      <span class="tool">Figma</span>
+      <span class="tool">Excel</span>
+      <span class="tool">Google Apps Script</span>
+      <span class="tool">ChatGPT</span>
+      <span class="tool">Claude</span>
+      <span class="tool">PowerPoint</span>
+    </div>
+  </section>
 
-    // 연도 표기
-    document.getElementById("year").textContent = new Date().getFullYear();
+  <!-- 연락 -->
+  <section class="shell contact" id="contact">
+    <div class="reveal">
+      <span class="eyebrow">05 — Contact</span>
+      <h2 style="margin-top:16px;">교육과 서비스, 양쪽 언어를 옮기는 일을 계속하고 싶습니다.</h2>
+      <div class="contact-links">
+        <!-- ▼ 실제 메일 주소로 교체 -->
+        <a class="btn" href="mailto:you@example.com">메일 보내기</a>
+        <!-- ▼ 깃허브 주소로 교체 -->
+        <a class="btn ghost" href="#">GitHub</a>
+        <!-- ▼ 포트폴리오 PDF 경로로 교체 (repo에 파일 업로드 후 ./portfolio.pdf) -->
+        <a class="btn ghost" href="#">포트폴리오 PDF</a>
+      </div>
+    </div>
 
-    // 이메일 복사
-    document.getElementById("copyEmailBtn").addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(PROFILE.email);
-        alert("이메일을 복사했습니다: " + PROFILE.email);
-      } catch (e) {
-        // 일부 환경에서 clipboard API 제한될 수 있어 fallback 제공
-        const temp = document.createElement("textarea");
-        temp.value = PROFILE.email;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand("copy");
-        document.body.removeChild(temp);
-        alert("이메일을 복사했습니다: " + PROFILE.email);
-      }
-    });
+    <footer>
+      <span class="code">김광진 · 교육 콘텐츠 기획</span>
+      <span class="code" id="yr"></span>
+    </footer>
+  </section>
 
-    // 메시지 모달
-    const dialog = document.getElementById("msgDialog");
-    const openBtn = document.getElementById("openMsgBtn");
-    const closeBtn = document.getElementById("closeDialogBtn");
-    const previewBtn = document.getElementById("previewBtn");
+</main>
 
-    openBtn.addEventListener("click", () => {
-      document.getElementById("previewArea").style.display = "none";
-      document.getElementById("fromInput").value = "";
-      document.getElementById("msgInput").value = "";
-      dialog.showModal();
-    });
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
 
-    closeBtn.addEventListener("click", () => dialog.close());
+  const items = document.querySelectorAll('.reveal');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    items.forEach(el => io.observe(el));
+  }
+</script>
 
-    previewBtn.addEventListener("click", () => {
-      const from = document.getElementById("fromInput").value.trim() || "익명";
-      const msg = document.getElementById("msgInput").value.trim() || "(내용 없음)";
-      document.getElementById("previewText").textContent = "From: " + from + "\n\n" + msg;
-      document.getElementById("previewArea").style.display = "block";
-    });
-  </script>
 </body>
 </html>
