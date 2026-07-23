@@ -156,17 +156,20 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 .band-head p{ margin:12px 0 0; max-width:620px; color:var(--ink-soft); font-size:14.5px; }
 
 /* ── 역량 ───────────────────────────────────────── */
-.skills{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--rule); border:1px solid var(--rule); }
-.skill{ background:var(--paper); padding:28px clamp(20px,3vw,32px); }
-.skill h3{ font-size:16.5px; margin-bottom:14px; display:flex; align-items:baseline; gap:10px; }
-.skill h3 .code{ font-size:11px; }
-.skill ul{ margin:0; padding:0; list-style:none; }
-.skill li{ position:relative; padding-left:16px; margin-bottom:10px; font-size:14px; line-height:1.65; color:var(--ink-soft); }
-.skill li::before{
-  content:""; position:absolute; left:0; top:11px;
-  width:5px; height:5px; border-radius:50%; background:var(--pen); opacity:.55;
+.skills{ display:grid; grid-template-columns:repeat(4,1fr); }
+.skill{ padding:0 clamp(14px,2vw,22px); border-left:1px solid var(--rule); }
+.skill:first-child{ border-left:0; padding-left:0; }
+.skill .code{ font-size:10px; letter-spacing:.14em; }
+.skill h3{ font-size:15.5px; margin:8px 0 10px; }
+.skill p{ margin:0; font-size:13.5px; line-height:1.7; color:var(--ink-soft); }
+@media (max-width:820px){
+  .skills{ grid-template-columns:1fr 1fr; row-gap:30px; }
+  .skill:nth-child(odd){ border-left:0; padding-left:0; }
 }
-@media (max-width:720px){ .skills{ grid-template-columns:1fr; } }
+@media (max-width:520px){
+  .skills{ grid-template-columns:1fr; row-gap:26px; }
+  .skill{ border-left:0; padding-left:0; }
+}
 
 /* ── 계통도(경력) ───────────────────────────────── */
 .tree{ position:relative; padding-left:34px; }
@@ -269,8 +272,16 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 }
 
 /* ── 도구 ───────────────────────────────────────── */
-.tools{ display:flex; flex-wrap:wrap; gap:10px; }
-.tool{ font-size:13.5px; padding:8px 14px; border:1px solid var(--rule); border-radius:999px; background:#fff; }
+.tools{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+.tools > div{ background:var(--paper); padding:24px clamp(0px,2vw,26px) 24px 0; }
+.tools > div + div{ padding-left:clamp(18px,2.5vw,26px); }
+.tools h3{ font-size:12px; margin-bottom:14px; font-family:var(--mono); letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); font-weight:400; }
+.tool-row{ display:flex; flex-wrap:wrap; gap:8px; }
+.tool{ font-size:13px; padding:7px 13px; border:1px solid var(--rule); border-radius:999px; background:#fff; }
+@media (max-width:720px){
+  .tools{ grid-template-columns:1fr; }
+  .tools > div + div{ padding-left:0; }
+}
 
 /* ── 마무리 ─────────────────────────────────────── */
 .contact{ margin-top:clamp(64px, 8vw, 96px); border-top:1.5px solid var(--ink); padding:clamp(48px,7vw,76px) 0 40px; }
@@ -374,40 +385,24 @@ footer{
 
     <div class="skills reveal">
       <article class="skill">
-        <h3>콘텐츠 기획 <span class="code">A</span></h3>
-        <ul>
-          <li>국정·검정 커리큘럼 기반 디지털 학습 콘텐츠 설계</li>
-          <li>애니메이션·인터랙티브·게임·챗봇·강의·문항 등 형식별 기획</li>
-          <li>개념–평가–심화로 이어지는 학습 흐름 구성</li>
-          <li>학습 목적과 실행 흐름 기준의 학습 모듈 구조 정리</li>
-        </ul>
+        <span class="code">A</span>
+        <h3>콘텐츠 기획</h3>
+        <p>국정·검정 커리큘럼을 기준으로 개념–평가–심화의 학습 흐름을 설계합니다.</p>
       </article>
       <article class="skill">
-        <h3>메타데이터 · 지식맵 <span class="code">B</span></h3>
-        <ul>
-          <li>커리큘럼–차시–문항의 위계 설계 및 메타데이터 관리</li>
-          <li>선후행 관계로 연결한 초등 전 과정 수학 계통도 구축</li>
-          <li>교육과정 표준분류체계 기반 개념 코드 세분화</li>
-          <li>문제은행 솔루션·LCMS·CMS 기반 콘텐츠 운영</li>
-        </ul>
+        <span class="code">B</span>
+        <h3>메타데이터 · 지식맵</h3>
+        <p>커리큘럼–차시–문항의 위계를 정의하고 코드 체계로 관리합니다.</p>
       </article>
       <article class="skill">
-        <h3>품질 관리 <span class="code">C</span></h3>
-        <ul>
-          <li>출시 전 표현·구조·사용성 전수 점검 및 수정·보완</li>
-          <li>수정·보완 대조표 기반 개정 운영</li>
-          <li>경쟁사 벤치마킹을 통한 콘텐츠 개선</li>
-          <li>서비스·개발 조직과 협업해 구현 결과까지 확인</li>
-        </ul>
+        <span class="code">C</span>
+        <h3>품질 관리</h3>
+        <p>출시 전 전수 점검부터 개정 운영까지, 구현 결과를 끝까지 확인합니다.</p>
       </article>
       <article class="skill">
-        <h3>데이터 · AI 활용 <span class="code">D</span></h3>
-        <ul>
-          <li>정답률·난이도 이상치 분석으로 취약 영역 도출</li>
-          <li>분석 결과를 보완 콘텐츠 기획으로 연결</li>
-          <li>반복 제작·검수 업무를 스크립트와 AI 도구로 자동화</li>
-          <li>필요한 도구는 직접 만들어 제작·검수에 투입</li>
-        </ul>
+        <span class="code">D</span>
+        <h3>데이터 · AI 활용</h3>
+        <p>정답률 이상치로 문제를 찾고, 반복 업무는 도구를 만들어 넘깁니다.</p>
       </article>
     </div>
   </section>
@@ -416,8 +411,8 @@ footer{
   <section class="shell band" id="path">
     <div class="band-head reveal">
       <span class="eyebrow">02 — Path</span>
-      <h2>제가 만든 지식맵의 방식대로,<br />경력도 선후행으로 이어져 있습니다.</h2>
-      <p>앞의 경험이 다음 일의 선행 학습이 되는 구조로 일해 왔습니다. 2025년 이후 근속이 짧은 구간은 AI 디지털교과서 정책 변화로 관련 사업과 조직이 함께 조정된 시기와 겹칩니다.</p>
+      <h2>콘텐츠를 만들다가,<br />콘텐츠가 놓이는 구조를 만들게 됐습니다.</h2>
+      <p>교재와 문항에서 시작해 메타데이터와 문제은행, 지식 개념맵, 학습 서비스의 모듈 구조로 다루는 단위가 커졌습니다. 2025년 이후 근속이 짧은 구간은 AI 디지털교과서 정책 변화로 관련 사업과 조직이 함께 조정된 시기와 겹칩니다.</p>
     </div>
 
     <div class="tree reveal">
@@ -472,8 +467,8 @@ footer{
       </div>
 
       <div class="node">
-        <span class="node-yr">2026</span>
-        <div class="node-span"><span class="node-bar" style="width:4%"></span><span class="node-mo">약 1.5개월 · 계약</span></div>
+        <span class="node-yr">2026.05 — 06</span>
+        <div class="node-span"><span class="node-bar" style="width:5%"></span><span class="node-mo">2개월 · 계약</span></div>
         <h3 class="node-role">신규 LMS 서비스 PM</h3>
         <span class="node-org">회사 E · 학습 서비스 기업 · 서비스 기획팀 · PM (계약)</span>
         <p class="node-body">여러 과목과 수준을 아우르는 신규 LMS의 오픈 베타 준비 단계에 참여했습니다. 학습 모듈 구조를 콘텐츠 형식이 아니라 학습 목적과 실행 흐름 기준으로 다시 정리하고, <span class="node-mark">콘텐츠 · 모듈 · 모듈 옵션 · 학습 이력 · AI 튜터를 별도 계층으로 분리</span>해 실행 구조를 정의했습니다. 콘텐츠팀과 서비스 기획팀이 같은 기준으로 일하도록 요구사항을 양쪽 언어로 옮기는 역할이었습니다.</p>
@@ -662,11 +657,10 @@ footer{
       <section>
         <h3>자격</h3>
         <ul>
-          <li>AICE Basic</li>
-          <li>CS Leaders (관리사)</li>
-          <li>중등학교 2급 정교사 (수학)</li>
-          <li>컴퓨터활용능력 2급</li>
-          <li>워드프로세서 2급</li>
+          <li>CS Leaders (관리사) · 2026</li>
+          <li>AICE Basic · 2023</li>
+          <li>중등학교 2급 정교사 (수학) · 2016</li>
+          <li>컴퓨터활용능력 2급 · 워드프로세서 2급</li>
         </ul>
       </section>
     </div>
@@ -679,14 +673,28 @@ footer{
       <h2>쓰는 도구</h2>
     </div>
     <div class="tools reveal">
-      <span class="tool">Tableau</span>
-      <span class="tool">draw.io</span>
-      <span class="tool">Figma</span>
-      <span class="tool">Excel</span>
-      <span class="tool">Google Apps Script</span>
-      <span class="tool">ChatGPT</span>
-      <span class="tool">Claude</span>
-      <span class="tool">PowerPoint</span>
+      <div>
+        <h3>데이터 · 분석</h3>
+        <div class="tool-row">
+          <span class="tool">Tableau</span>
+          <span class="tool">Excel</span>
+        </div>
+      </div>
+      <div>
+        <h3>구조 · 설계</h3>
+        <div class="tool-row">
+          <span class="tool">draw.io</span>
+          <span class="tool">Figma</span>
+        </div>
+      </div>
+      <div>
+        <h3>AI · 자동화</h3>
+        <div class="tool-row">
+          <span class="tool">Google Apps Script</span>
+          <span class="tool">ChatGPT</span>
+          <span class="tool">Claude</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -699,7 +707,11 @@ footer{
         저는 교사를 준비하다 교육 콘텐츠를 만드는 쪽으로 왔습니다.
         교실에서 학생을 만나지는 않지만, 시간과 장소에 관계없이 좋은 교육을 받을 수 있는 환경을 만드는 일이라고 생각하며 10년을 보냈습니다.
         기술 자체보다 그 기술이 학습의 완성도를 어떻게 높이는지를 먼저 봅니다.
-        앞으로는 같은 일을 제품의 단위에서 하려고 합니다.
+      </p>
+      <p>
+        <b style="color:var(--ink);font-weight:600;">찾고 있는 자리 —</b>
+        학습이나 콘텐츠가 제품의 핵심인 곳에서, 도메인을 아는 사람이 필요한 프로덕트 역할.
+        데이터로 문제를 정의하고 구조로 푸는 일이라면 교육 밖의 영역도 좋습니다.
       </p>
       <div class="contact-links">
         <a class="btn" href="mailto:kwangjin.owl@gmail.com">메일 보내기</a>
@@ -711,7 +723,8 @@ footer{
 
     <footer>
       <span class="code">김광진</span>
-      <span class="code">build 19 · <span id="yr"></span></span>
+      <span class="code" id="upd"></span>
+      <span class="code">build 23 · <span id="yr"></span></span>
     </footer>
   </section>
 
@@ -719,6 +732,8 @@ footer{
 
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
+  // 최종 수정일 — 내용을 갱신할 때 이 값도 함께 바꿔 주세요
+  document.getElementById('upd').textContent = 'updated 2026.07';
 
   const items = document.querySelectorAll('.reveal');
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
