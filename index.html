@@ -123,7 +123,7 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 }
 @keyframes draw{ to{ stroke-dashoffset:0; } }
 
-.hero-lede{ margin:28px 0 0; max-width:52ch; font-size:clamp(15px,1.6vw,17px); color:var(--ink-soft); }
+.hero-lede{ margin:28px 0 0; max-width:640px; font-size:clamp(15px,1.6vw,17px); color:var(--ink-soft); }
 .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:32px; }
 .tag{
   font-family:var(--mono); font-size:11.5px;
@@ -152,7 +152,7 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 .band{ padding:clamp(58px, 8.5vw, 100px) 0; }
 .band-head{ margin-bottom:clamp(30px, 4vw, 46px); }
 .band-head h2{ font-family:var(--serif); font-size:clamp(24px, 3.4vw, 33px); margin-top:14px; line-height:1.4; }
-.band-head p{ margin:12px 0 0; max-width:50ch; color:var(--ink-soft); font-size:14.5px; }
+.band-head p{ margin:12px 0 0; max-width:620px; color:var(--ink-soft); font-size:14.5px; }
 
 /* ── 역량 ───────────────────────────────────────── */
 .skills{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--rule); border:1px solid var(--rule); }
@@ -160,7 +160,7 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 .skill h3{ font-size:16.5px; margin-bottom:14px; display:flex; align-items:baseline; gap:10px; }
 .skill h3 .code{ font-size:11px; }
 .skill ul{ margin:0; padding:0; list-style:none; }
-.skill li{ position:relative; padding-left:16px; margin-bottom:8px; font-size:14px; color:var(--ink-soft); }
+.skill li{ position:relative; padding-left:16px; margin-bottom:10px; font-size:14px; line-height:1.65; color:var(--ink-soft); }
 .skill li::before{
   content:""; position:absolute; left:0; top:11px;
   width:5px; height:5px; border-radius:50%; background:var(--pen); opacity:.55;
@@ -173,7 +173,7 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
   content:""; position:absolute; left:5px; top:14px; bottom:70px;
   width:1.5px; background:var(--ink); opacity:.22;
 }
-.node{ position:relative; padding-bottom:44px; }
+.node{ position:relative; padding-bottom:52px; }
 .node:last-child{ padding-bottom:0; }
 .node::before{
   content:""; position:absolute;
@@ -200,13 +200,13 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 
 .node-role{ font-family:var(--serif); font-size:clamp(18px,2.4vw,22px); margin:2px 0 2px; }
 .node-org{ font-size:13px; color:var(--ink-soft); }
-.node-body{ margin:14px 0 0; font-size:14.5px; color:var(--ink-soft); max-width:58ch; }
+.node-body{ margin:14px 0 0; font-size:14.5px; line-height:1.75; color:var(--ink-soft); max-width:660px; }
 .node.next .node-role{ color:var(--pen); }
 .node-mark{ background:linear-gradient(transparent 62%, var(--mark) 62%); padding:0 1px; color:var(--ink); }
-.node-wins{ margin:14px 0 0; padding:0; list-style:none; max-width:58ch; }
+.node-wins{ margin:16px 0 0; padding:0; list-style:none; max-width:660px; }
 .node-wins li{
-  position:relative; padding-left:20px; margin-top:5px;
-  font-size:13.5px; color:var(--ink);
+  position:relative; padding-left:20px; margin-top:7px;
+  font-size:13.5px; line-height:1.65; color:var(--ink);
 }
 .node-wins li::before{
   content:"→"; position:absolute; left:0; top:0;
@@ -215,8 +215,9 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 @media (max-width:640px){
   .tree{ padding-left:26px; }
   .tree::before{ left:4px; }
-  .node::before{ left:-27px; }
-  
+  .node::before{ left:-26px; }
+}
+
 /* ── 전환 매핑 ──────────────────────────────────── */
 .bridge{ border-top:1.5px solid var(--ink); }
 .bridge-head{ display:grid; grid-template-columns:1fr 56px 1fr; padding:14px 0; border-bottom:1px solid var(--rule); }
@@ -234,18 +235,18 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 }
 
 /* ── 작업 ───────────────────────────────────────── */
-.works{ display:grid; gap:18px; }
+.works{ display:grid; gap:22px; }
 .work{
   background:#fff; border:1px solid var(--rule); border-radius:3px;
   padding:clamp(24px,3.4vw,34px);
   display:grid; grid-template-columns:minmax(0,1fr) clamp(280px, 34%, 360px); gap:clamp(20px,3.5vw,40px);
 }
-.work h3{ font-family:var(--serif); font-size:clamp(19px,2.5vw,23px); margin:10px 0 12px; }
-.work p{ margin:0; font-size:14.5px; color:var(--ink-soft); }
+.work h3{ font-family:var(--serif); font-size:clamp(19px,2.5vw,23px); margin:10px 0 14px; }
+.work p{ margin:0; font-size:14.5px; line-height:1.75; color:var(--ink-soft); }
 .work-meta{ border-left:1px solid var(--rule); padding-left:clamp(18px,2.5vw,28px); }
 .work-meta dl{ margin:0; }
-.work-meta dt{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:var(--ink-soft); text-transform:uppercase; }
-.work-meta dd{ margin:4px 0 16px; font-size:14px; }
+.work-meta dt{ font-family:var(--mono); font-size:10px; letter-spacing:.12em; color:var(--ink-soft); text-transform:uppercase; }
+.work-meta dd{ margin:5px 0 18px; font-size:13.5px; line-height:1.6; }
 .work-meta dd:last-of-type{ margin-bottom:0; }
 .outcome{ color:var(--pen); font-weight:600; }
 @media (max-width:760px){
@@ -272,8 +273,8 @@ h1,h2,h3{ margin:0; font-weight:700; letter-spacing:-.02em; }
 
 /* ── 마무리 ─────────────────────────────────────── */
 .contact{ border-top:1.5px solid var(--ink); padding:clamp(48px,7vw,76px) 0 40px; }
-.contact h2{ font-family:var(--serif); font-size:clamp(23px,3.4vw,32px); line-height:1.5; max-width:22ch; margin-top:16px; }
-.contact p{ margin:22px 0 0; max-width:56ch; font-size:14.5px; color:var(--ink-soft); }
+.contact h2{ font-family:var(--serif); font-size:clamp(23px,3.4vw,32px); line-height:1.5; max-width:620px; margin-top:16px; }
+.contact p{ margin:22px 0 0; max-width:660px; font-size:14.5px; line-height:1.75; color:var(--ink-soft); }
 .contact-links{ display:flex; flex-wrap:wrap; gap:10px; margin-top:34px; }
 .btn{
   display:inline-flex; align-items:center; gap:8px;
@@ -705,7 +706,7 @@ footer{
 
     <footer>
       <span class="code">김광진</span>
-      <span class="code">build 12 · <span id="yr"></span></span>
+      <span class="code">build 13 · <span id="yr"></span></span>
     </footer>
   </section>
 
