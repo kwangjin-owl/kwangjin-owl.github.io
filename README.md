@@ -1,1 +1,1 @@
-# kwangjin-owl.my_page
+# kwangjin-owl/my_page
