@@ -1,1 +1,1 @@
-# kwangjin-owl.github.io
+# kwangjin-owl.my_page
